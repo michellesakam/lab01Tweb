@@ -1,0 +1,136 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<html>
+ <body>  
+     <div>
+     <h1>Playing with javascript and librairies<h1>  
+     <hr/>
+     </div>
+     
+       <div class="panel panel-default">
+           <ul> 
+               <li>When you move the mouse, the coordinates should be displayed in                     the sticky footer</li>
+               <li>when you move the mouse, a person should be create with random attributes</li>
+               <li>The current time should be displayed in the clock panel</li>
+               <li>when you click on the "show alert"button, a dialog should appear</li>
+               <li>when you click on the "toggle student"button, the panel should be hidden/shown</li>
+           </ul>
+      </div>
+         
+     <div>
+         
+         <div class="alert alert-success" role="alert"  id="1">
+        </div>
+         
+     </div>
+         
+     <div>
+         
+         <div class="alert alert-info" role="alert" id="2">
+         
+        </div>
+     </div>
+         
+    <div class="panel panel-primary">
+        
+      <div class="panel-heading">
+        <h2 class="check">check</h2>
+      </div>
+        
+      <div class="panel-body">
+      <div id="locale"></div>
+          
+    <script type="text/javascript">
+        function afficher() {
+          var offsetUTC = +12,
+          lD = new Date(),
+          oD = new Date();
+          oD.setHours(lD.getUTCHours()+offsetUTC);
+
+          document.getElementById('locale').innerHTML = lD.toString();
+        }
+
+        window.onload=function() {
+          afficher();
+          setInterval(afficher,1000);
+        }
+    </script>
+          
+      </div>
+    </div>
+        
+</div>
+    </div>
+     
+     <div>
+         <input type="button" value="show alert" id="alert">
+      <input type="button" value="toggle student" id="toggle">     
+     </div>
+
+     </br>
+     </br>
+    
+  <footer>
+      <span></span>
+      <span></span>
+  </footer>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">         </script>
+        <script src="../../dist/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        
+            <!-- Load Chance -->
+       <script src="http://chancejs.com/chance.min.js"></script>
+    
+    <script>
+    $( document ).mousemove(function( event ) {
+      var clientCoords =event.clientX + ", " + event.clientY;
+      $( "span:last" ).text( clientCoords );
+      var name = chance.name();
+      var gender = chance.gender();
+      $("#1").text("Hello " + name + "(" + gender + ")!");
+      if(gender == "Female"){
+          $("#1").removeClass( "alert alert-info" ).addClass( "alert alert-danger" );
+        }
+      else if(gender == "Male"){
+          $("#1").removeClass( "alert alert-danger" ).addClass( "alert alert-info" );
+        }
+    });
+
+        $("document").ready(function(){
+                $.getJSON("https://api.myjson.com/bins/4lafo", function(result){
+                    var j = 0;
+                     for(var i = 0; i < 3; i++){
+                    $.each(result, function(i, field){
+                        $("#2").append("Room: " + field[j++] + "," + field[j++]+ "                                <br/>");      
+                    });
+                   }
+                });
+                                          
+               $('#alert').click(function() {
+                 alert('vous venez de cliquer sur le bouton show alert');
+                });
+             $('#toggle').click(function() {
+                $('#1').toggle();
+              });
+            
+        });
+        
+    </script>
+    
+   </body>
+  </html>
+        
+
+
+</body></html>
